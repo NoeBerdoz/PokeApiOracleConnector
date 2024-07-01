@@ -20,6 +20,12 @@
             <artifactId>ojdbc8</artifactId>
             <version>23.3.0.23.09</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+
     </dependencies>
     <repositories>
         <repository>

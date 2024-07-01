@@ -16,5 +16,9 @@ public class Main {
         } catch (SQLException e) {
             System.err.println("[-] An error occurred: " + e.getMessage());
         }
+
+        for (int id = 1; id <= 151; id++) {
+            DataInserter.insertPokemonData(id);
+        }
     }
 }
