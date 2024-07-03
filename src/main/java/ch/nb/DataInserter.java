@@ -1,4 +1,5 @@
 package ch.nb;
+import ch.nb.utils.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ public class DataInserter {
             String jsonData = PokeApiFetcher.fetchPokemonData(id);
             JSONObject pokemon = new JSONObject(jsonData);
 
-            String name = pokemon.getString("name");
+            String name = StringUtils.capitalizeFirstLetter(pokemon.getString("name"));
 
             JSONObject stats = new JSONObject();
             JSONArray statsArray = pokemon.getJSONArray("stats");
@@ -88,7 +89,7 @@ public class DataInserter {
 
             // Insert types and association
             for (int i = 0; i < types.length(); i++) {
-                String typeName = types.getJSONObject(i).getJSONObject("type").getString("name");
+                String typeName = StringUtils.capitalizeFirstLetter(types.getJSONObject(i).getJSONObject("type").getString("name"));
                 int typeId = getTypeId(connection, typeName);
 
                 String insertPokemonTypeSQL = "INSERT INTO POKEMON_TYPES (POKEMON_ID, TYPE_ID) VALUES (?, ?)";
