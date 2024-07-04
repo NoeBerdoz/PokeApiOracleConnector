@@ -14,8 +14,6 @@ public class PokeApiFetcher {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
-        System.out.println("[+] Fetching: " + urlString);
-
 
         if (conn.getResponseCode() != 200) {
             throw new RuntimeException("HttpResponseCode: " + conn.getResponseCode());

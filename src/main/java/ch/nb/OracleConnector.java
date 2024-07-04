@@ -13,7 +13,6 @@ public class OracleConnector {
     private static final String DB_PASSWORD = propertiesLoader.getProperty("db.password");
 
     public static Connection getConnection() throws SQLException {
-        System.out.println("[+] Connecting to database...");
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
 }

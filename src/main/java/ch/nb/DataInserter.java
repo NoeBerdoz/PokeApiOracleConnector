@@ -61,7 +61,8 @@ public class DataInserter {
             statsStmt.setInt(6, stats.getInt("speed"));
             statsStmt.executeUpdate();
 
-            System.out.println("[+] Inserted Stats");
+            String insertStatsSqlFinalQuery = "INSERT INTO STATS (HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED) VALUES (" + stats.getInt("hp") + "," + stats.getInt("attack") + "," + stats.getInt("defense") + "," + stats.getInt("special-attack") + "," + stats.getInt("special-defense") + "," + stats.getInt("speed") + ");";
+            System.out.println(insertStatsSqlFinalQuery);
 
             // Retrieve the generated stats ID
             ResultSet generatedKeys = statsStmt.getGeneratedKeys();
@@ -78,7 +79,10 @@ public class DataInserter {
             pokemonStmt.setBytes(3, image);
             pokemonStmt.executeUpdate();
 
-            System.out.println("[+] Inserted Pokémon: " + name);
+            String imageHex = bytesToHex(image);
+            String insertPokemonSqlFinalQuery = "INSERT INTO POKEMONS (NAME, STATS_ID, IMAGE) VALUES (" + "'" + name +"'" + "," + statsId + "," + "HEXTORAW('" + imageHex + "')" + ");";
+            System.out.println(insertPokemonSqlFinalQuery);
+
 
             // Retrieve the generated Pokémon ID
             generatedKeys = pokemonStmt.getGeneratedKeys();
@@ -97,7 +101,9 @@ public class DataInserter {
                 pokemonTypeStmt.setInt(1, pokemonId);
                 pokemonTypeStmt.setInt(2, typeId);
                 pokemonTypeStmt.executeUpdate();
-                System.out.println("[+] Inserted type: " + typeName + " for Pokémon: " + name);
+
+                String insertPokemonTypeSqlFinalQuery = "INSERT INTO POKEMON_TYPES (POKEMON_ID, TYPE_ID) VALUES (" + pokemonId + "," + typeId + ");";
+                System.out.println(insertPokemonTypeSqlFinalQuery);
             }
 
         }
@@ -119,6 +125,9 @@ public class DataInserter {
             insertTypeStmt.setString(1, typeName);
             insertTypeStmt.executeUpdate();
 
+            String insertTypeSqlFinalQuery = "INSERT INTO TYPES (NAME) VALUES ('" + typeName + "');";
+            System.out.println(insertTypeSqlFinalQuery);
+
             ResultSet generatedKeys = insertTypeStmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 return generatedKeys.getInt(1);
@@ -126,5 +135,13 @@ public class DataInserter {
                 throw new SQLException("Failed to insert type: " + typeName);
             }
         }
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
 }
