@@ -1,9 +1,8 @@
 # PokeApiOracleConnector
 
 ## Context
-Fastly made and not well optimised. 
-I created this tool to download some data coming from the [PokéApi](https://pokeapi.co/) and insert it on a Oracle database for a bachelor course.
-The data then used to create a Pokemon Manager app using [Apex](https://apex.oracle.com/en/)
+PokeApiOracleConnector is a tool designed to fetch data from the [PokéApi](https://pokeapi.co/) and insert it into an Oracle database. This tool was created for a bachelor course project and is used to support the development of a Pokémon Manager app using [Apex](https://apex.oracle.com/en/). Please note that the tool is designed for quick setup and may not be highly optimized.
+Please take note that this tool was made in a hurry and is not well optimised.
 
 ## Installation
 
